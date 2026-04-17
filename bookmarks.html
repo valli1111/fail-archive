@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saved — FailArchive</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="logo"><span class="logo-fail">Fail</span><span class="logo-archive">Archive</span></a>
+    <div class="header-right">
+      <a href="/submit.html" class="btn btn-primary">+ Share a Failure</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container bookmarks-page">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px">
+      <div>
+        <h1 class="page-title">Saved Failures</h1>
+        <p style="color:var(--text3);font-size:14px;margin-top:4px">Stored locally in your browser.</p>
+      </div>
+      <button class="btn btn-secondary" id="clear-all" style="display:none">Clear all</button>
+    </div>
+    <div id="bookmarks-list"></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a href="/" class="logo" style="font-size:15px"><span class="logo-fail">Fail</span><span class="logo-archive">Archive</span></a>
+    <span class="footer-copy">No judgment. Just truth.</span>
+  </div>
+</footer>
+
+<div id="toast-container"></div>
+<script src="/js/utils.js"></script>
+<script>
+async function loadBookmarks() {
+  const bm = getBookmarks();
+  const list = document.getElementById('bookmarks-list');
+  const clearBtn = document.getElementById('clear-all');
+
+  if (!bm.length) {
+    list.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">☆</div>
+        <p>No saved failures yet.</p>
+        <a href="/" class="btn btn-primary">Browse failures</a>
+      </div>`;
+    return;
+  }
+
+  clearBtn.style.display = 'inline-flex';
+  clearBtn.addEventListener('click', () => {
+    localStorage.removeItem('fa_bookmarks');
+    loadBookmarks();
+    toast('All bookmarks cleared', 'success');
+  });
+
+  // Fetch full entry data for each bookmark
+  list.innerHTML = '<div style="color:var(--text3);font-size:14px;padding:16px 0">Loading...</div>';
+  const results = await Promise.allSettled(
+    bm.map(b => fetch(`/api/entries/${b.id}`).then(r => r.ok ? r.json() : null))
+  );
+
+  list.innerHTML = '';
+  results.forEach((res, i) => {
+    const data = res.status === 'fulfilled' && res.value ? res.value.entry : null;
+    const b = bm[i];
+    if (!data) {
+      list.insertAdjacentHTML('beforeend', `
+        <div class="entry-card" style="opacity:.5">
+          <h2 style="font-size:15px">${esc(b.title)}</h2>
+          <p style="color:var(--text3);font-size:13px">Entry may have been removed.</p>
+          <button class="btn btn-ghost" style="margin-top:8px;font-size:12px" onclick="removeBookmark(${b.id})">Remove</button>
+        </div>`);
+      return;
+    }
+    const tags = Array.isArray(data.tags) ? data.tags : [];
+    list.insertAdjacentHTML('beforeend', `
+      <div style="position:relative">
+        <a href="/entry.html?id=${data.id}" class="entry-card">
+          <div class="card-header">
+            <div class="card-tags">
+              <span class="tag ${data.category}">${data.category}</span>
+              ${data.industry ? `<span class="tag">${esc(data.industry)}</span>` : ''}
+              ${tags.slice(0,2).map(t => `<span class="tag user-tag">#${esc(t)}</span>`).join('')}
+            </div>
+          </div>
+          <h2>${esc(data.title)}</h2>
+          <p class="preview">${esc(data.story)}</p>
+          <div class="card-footer">
+            <span class="card-author">${esc(data.author)} · ${timeAgo(data.created_at)}</span>
+            <span style="font-size:12px;color:var(--text3)">Saved ${timeAgo(Math.floor(b.savedAt/1000))}</span>
+          </div>
+        </a>
+        <button onclick="removeBookmark(${data.id})" title="Remove bookmark"
+          style="position:absolute;top:16px;right:16px;background:transparent;border:none;cursor:pointer;font-size:18px;color:var(--yellow)">★</button>
+      </div>`);
+  });
+}
+
+function removeBookmark(id) {
+  toggleBookmark(id, '');
+  loadBookmarks();
+  toast('Removed from saved', 'success', 1500);
+}
+
+loadBookmarks();
+</script>
+</body>
+</html>

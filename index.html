@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FailArchive — Real failures. Real lessons.</title>
+  <meta name="description" content="A community archive of honest failure stories from founders, managers, and builders. Learn from real mistakes.">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="FailArchive RSS" href="/rss.xml">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="logo"><span class="logo-fail">Fail</span><span class="logo-archive">Archive</span></a>
+    <div class="header-right">
+      <a href="/bookmarks.html" class="btn btn-secondary" title="Saved entries">★ Saved</a>
+      <a href="/submit.html" class="btn btn-primary">+ Share a Failure</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>Real failures.<br><em>Real lessons.</em></h1>
+      <p class="lead">Founders, managers, and builders share what went wrong — so you don't have to learn the hard way.</p>
+      <div class="search-wrap">
+        <input type="text" id="search" placeholder="Search failures, lessons, industries..." autocomplete="off">
+        <span class="search-icon">⌕</span>
+      </div>
+      <p class="search-hint">Press <kbd>/</kbd> to focus search · <kbd>R</kbd> for a random failure</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num" id="stat-entries">—</span><span class="hero-stat-label">Failures shared</span></div>
+        <div class="hero-stat"><span class="hero-stat-num" id="stat-tips">—</span><span class="hero-stat-label">Expert tips</span></div>
+        <div class="hero-stat"><span class="hero-stat-num" id="stat-been-there">—</span><span class="hero-stat-label">People said "been there"</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRENDING -->
+  <section class="trending-section container" id="trending-section">
+    <div class="section-header">
+      <span class="section-title">Trending this week</span>
+      <button class="btn btn-ghost" id="random-btn">↻ Surprise me</button>
+    </div>
+    <div class="trending-grid" id="trending-list">
+      <div class="skeleton-card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line" style="width:60%"></div></div>
+      <div class="skeleton-card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line" style="width:60%"></div></div>
+      <div class="skeleton-card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line" style="width:60%"></div></div>
+    </div>
+  </section>
+
+  <!-- FILTERS -->
+  <section class="filters-section container">
+    <div class="filter-row">
+      <button class="filter-btn active" data-category="">All</button>
+      <div class="filter-divider"></div>
+      <button class="filter-btn" data-category="hiring">Hiring</button>
+      <button class="filter-btn" data-category="product">Product</button>
+      <button class="filter-btn" data-category="marketing">Marketing</button>
+      <button class="filter-btn" data-category="finance">Finance</button>
+      <button class="filter-btn" data-category="operations">Operations</button>
+      <button class="filter-btn" data-category="tech">Tech</button>
+      <button class="filter-btn" data-category="leadership">Leadership</button>
+    </div>
+    <div class="sort-row">
+      <span class="sort-label">Sort by:</span>
+      <button class="sort-btn active" data-sort="recent">Recent</button>
+      <button class="sort-btn" data-sort="top">Most voted</button>
+      <button class="sort-btn" data-sort="trending">Trending</button>
+      <button class="sort-btn" data-sort="discussed">Most discussed</button>
+    </div>
+    <div class="impact-row">
+      <span class="impact-label">Impact:</span>
+      <button class="impact-btn" data-impact="">All</button>
+      <button class="impact-btn" data-impact="5">★★★★★ Critical</button>
+      <button class="impact-btn" data-impact="4">★★★★ Major</button>
+      <button class="impact-btn" data-impact="3">★★★ Significant</button>
+    </div>
+  </section>
+
+  <!-- TAG CLOUD (shown when tags loaded) -->
+  <div class="container" id="tag-cloud-wrap" style="margin-bottom:16px;display:none">
+    <div class="tag-cloud" id="tag-cloud"></div>
+  </div>
+
+  <!-- ENTRIES -->
+  <section class="container" style="padding-bottom:16px">
+    <div class="entries-list" id="entries-list">
+      <div class="skeleton-card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line" style="width:80%"></div></div>
+      <div class="skeleton-card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line" style="width:80%"></div></div>
+      <div class="skeleton-card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line" style="width:80%"></div></div>
+    </div>
+  </section>
+
+  <div class="load-more-wrap container">
+    <button id="load-more" class="btn btn-secondary" style="display:none">Load more</button>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a href="/" class="logo" style="font-size:15px"><span class="logo-fail">Fail</span><span class="logo-archive">Archive</span></a>
+    <div class="footer-links">
+      <a href="/submit.html">Share a failure</a>
+      <a href="/bookmarks.html">Saved</a>
+      <a href="/admin.html">Admin</a>
+      <a href="/rss.xml">RSS</a>
+    </div>
+    <span class="footer-copy">No judgment. Just truth.</span>
+  </div>
+</footer>
+
+<div id="toast-container"></div>
+
+<script src="/js/utils.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

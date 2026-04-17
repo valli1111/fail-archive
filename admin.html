@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — FailArchive</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="logo"><span class="logo-fail">Fail</span><span class="logo-archive">Archive</span></a>
+    <div class="header-right">
+      <span id="admin-badge" style="display:none;font-size:12px;color:var(--green);font-weight:700;background:var(--green-dim);border:1px solid rgba(34,197,94,.3);padding:4px 10px;border-radius:6px">● Admin</span>
+      <button class="btn btn-ghost" id="logout-btn" style="display:none" onclick="logout()">Log out</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container admin-page">
+
+    <!-- LOGIN -->
+    <div id="login-view" class="admin-login">
+      <h1 class="page-title" style="margin-bottom:8px">Admin</h1>
+      <p style="color:var(--text3);font-size:14px;margin-bottom:24px">Enter your admin token to continue.</p>
+      <div class="form-group">
+        <input class="form-input" type="password" id="token-input" placeholder="Admin token" autocomplete="current-password">
+      </div>
+      <div id="login-error" style="color:var(--accent);font-size:13px;margin-bottom:12px;display:none">Invalid token.</div>
+      <button class="btn btn-primary" onclick="doLogin()" style="width:100%">Sign in</button>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="admin-view" style="display:none">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+        <h1 class="page-title" style="font-size:24px">Dashboard</h1>
+      </div>
+
+      <!-- STATS -->
+      <div class="admin-stat-grid" id="admin-stats"></div>
+
+      <!-- TABS -->
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="approved" onclick="switchTab('approved')">Approved</button>
+        <button class="admin-tab" data-tab="pending" onclick="switchTab('pending')">Pending</button>
+        <button class="admin-tab" data-tab="rejected" onclick="switchTab('rejected')">Rejected</button>
+        <button class="admin-tab" data-tab="reports" onclick="switchTab('reports')">Reports</button>
+      </div>
+
+      <div id="admin-content"></div>
+    </div>
+
+  </div>
+</main>
+
+<div id="toast-container"></div>
+<script src="/js/utils.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>

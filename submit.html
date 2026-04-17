@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share a Failure — FailArchive</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="logo"><span class="logo-fail">Fail</span><span class="logo-archive">Archive</span></a>
+    <div class="header-right">
+      <a href="/" class="btn btn-ghost">← Back</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container submit-page">
+    <h1 class="page-title">Share a Failure</h1>
+    <p class="page-lead">Your honest story could save someone else months of pain. The more specific, the more useful. Company name is optional.</p>
+
+    <div class="notice notice-anon">
+      <strong>Anonymous by default.</strong> No account required. The "your role" field is whatever you want — a job title, pseudonym, or nothing at all. We store no identifying information.
+    </div>
+
+    <form id="submit-form" novalidate>
+
+      <div class="form-group">
+        <label class="form-label">Title <span class="req">*</span></label>
+        <input class="form-input" type="text" name="title" maxlength="200"
+          placeholder="e.g. We hired too fast and burned through runway">
+        <p class="form-hint">One sentence that captures the failure. Be specific.</p>
+        <div class="char-count" id="cc-title">0 / 200</div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label class="form-label">Industry <span class="req">*</span></label>
+          <input class="form-input" type="text" name="industry" placeholder="e.g. SaaS, E-commerce, Agency, Healthcare">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category <span class="req">*</span></label>
+          <select class="form-input" name="category">
+            <option value="">Select a category</option>
+            <option value="hiring">Hiring</option>
+            <option value="product">Product</option>
+            <option value="marketing">Marketing</option>
+            <option value="finance">Finance</option>
+            <option value="operations">Operations</option>
+            <option value="tech">Tech</option>
+            <option value="leadership">Leadership</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label class="form-label">Company or project name</label>
+          <input class="form-input" type="text" name="company" placeholder="Optional — or leave blank">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your role</label>
+          <input class="form-input" type="text" name="author" placeholder="e.g. Founder, Head of Product, Anonymous">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Tags</label>
+        <input class="form-input" type="text" name="tags" placeholder="e.g. runway, hiring, scaling (comma separated, max 8)">
+        <p class="form-hint">Help others find this story.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Impact level</label>
+        <div class="impact-select" id="impact-select">
+          <button type="button" class="impact-option" data-val="1"><span>●</span>Minor</button>
+          <button type="button" class="impact-option" data-val="2"><span>●●</span>Noticeable</button>
+          <button type="button" class="impact-option selected" data-val="3"><span>●●●</span>Significant</button>
+          <button type="button" class="impact-option" data-val="4"><span>●●●●</span>Major</button>
+          <button type="button" class="impact-option" data-val="5"><span>●●●●●</span>Critical</button>
+        </div>
+        <input type="hidden" name="impact_level" value="3">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">What happened? <span class="req">*</span></label>
+        <textarea class="form-input" name="story" rows="6"
+          placeholder="Tell the full story. Context, timeline, what you did. The more specific, the more useful to others."></textarea>
+        <p class="form-hint">Don't sugarcoat. Specific failures teach more than vague ones.</p>
+        <div class="char-count" id="cc-story">0 chars</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">What exactly went wrong? <span class="req">*</span></label>
+        <textarea class="form-input" name="what_went_wrong" rows="4"
+          placeholder="The root cause. Not 'bad luck' — what specific decision, assumption, or blind spot caused this?"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">What did you learn? <span class="req">*</span></label>
+        <textarea class="form-input" name="what_learned" rows="4"
+          placeholder="The actionable insight. What would you do differently? What should others watch out for?"></textarea>
+        <p class="form-hint">This is the most valuable part. Be direct and specific.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">What happened after? (optional)</label>
+        <textarea class="form-input" name="recovery" rows="3"
+          placeholder="Did you recover? How? This gives hope and shows the real arc."></textarea>
+      </div>
+
+      <div id="form-error" class="form-error" style="margin-bottom:16px"></div>
+
+      <div class="submit-footer">
+        <button type="submit" class="btn btn-primary" id="submit-btn">Submit Failure</button>
+        <span style="font-size:13px;color:var(--text3)">No account needed. No judgment.</span>
+      </div>
+    </form>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a href="/" class="logo" style="font-size:15px"><span class="logo-fail">Fail</span><span class="logo-archive">Archive</span></a>
+    <span class="footer-copy">No judgment. Just truth.</span>
+  </div>
+</footer>
+
+<div id="toast-container"></div>
+<script src="/js/utils.js"></script>
+<script src="/js/submit.js"></script>
+</body>
+</html>

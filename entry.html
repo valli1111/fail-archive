@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FailArchive</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="logo"><span class="logo-fail">Fail</span><span class="logo-archive">Archive</span></a>
+    <div class="header-right">
+      <a href="/bookmarks.html" class="btn btn-secondary">★ Saved</a>
+      <a href="/submit.html" class="btn btn-primary">+ Share a Failure</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container entry-detail" id="entry-content">
+    <div style="display:flex;gap:12px;flex-direction:column">
+      <div class="skeleton-card" style="height:120px"></div>
+      <div class="skeleton-card" style="height:180px"></div>
+      <div class="skeleton-card" style="height:160px"></div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a href="/" class="logo" style="font-size:15px"><span class="logo-fail">Fail</span><span class="logo-archive">Archive</span></a>
+    <div class="footer-links">
+      <a href="/submit.html">Share a failure</a>
+      <a href="/rss.xml">RSS</a>
+    </div>
+    <span class="footer-copy">No judgment. Just truth.</span>
+  </div>
+</footer>
+
+<div id="toast-container"></div>
+
+<script src="/js/utils.js"></script>
+<script src="/js/entry.js"></script>
+</body>
+</html>
